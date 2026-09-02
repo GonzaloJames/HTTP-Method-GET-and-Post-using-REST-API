@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP GET and POST Using REST API</title>
+</head>
+<body>
+
+    <h2>HTTP GET and POST Using REST API</h2>
+
+    <button onclick="getData()">GET</button>
+    <button onclick="postData()">POST</button>
+
+    <pre id="result"></pre>
+
+    <script>
+        const API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+        function getData() {
+            fetch(API_URL + "/1", {
+                method: "GET"
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("GET Response:", data);
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error("GET Error:", error);
+                document.getElementById("result").textContent =
+                    "GET Error: " + error;
+            });
+        }
+
+        function postData() {
+            const newPost = {
+                title: "Hello API",
+                body: "This is a POST request.",
+                userId: 1
+            };
+
+            fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newPost)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("POST Response:", data);
+
+                document.getElementById("result").textContent =
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error("POST Error:", error);
+                document.getElementById("result").textContent =
+                    "POST Error: " + error;
+            });
+        }
+    </script>
+
+</body>
+</html>
