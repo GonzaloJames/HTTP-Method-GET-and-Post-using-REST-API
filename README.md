@@ -1,1 +1,0 @@
-# HTTP-Method-GET-and-Post-using-REST-API
